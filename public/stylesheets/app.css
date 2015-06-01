@@ -5,8 +5,10 @@ body {
   font-family: 'Open Sans';
   color: white;
   min-height: 100%;
-  background: -webkit-radial-gradient(#2b1339, #380c77);
-  background: radial-gradient(#2b1339, #380c77); }
+  background: -webkit-linear-gradient(#2b1339, #380c77);
+  background: linear-gradient(#2b1339, #380c77);
+  margin: 0;
+  background-attachment: fixed; }
 
 body.landing {
   background: #5b5579; }
