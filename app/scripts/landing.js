@@ -14,5 +14,27 @@ $(document).ready(function() {
    $(this).animate({'margin-top': '0px'});
  };
 
-  $('.selling-points .point').hover(onHoverAction, offHoverAction);
+$(document).ready(function(){
+  $('.point h5').click(function(){
+    $(this).css({'font-size': 32})
+  })
 });
+
+  $('.selling-points .point').hover(onHoverAction, offHoverAction);
+
+$(document).ready(function(){
+  $('h1').click(function(){
+    $(this).fadeOut('slow', function(){})
+  })
+ })
+});
+
+ var onHoverAction2 = function(){
+   $(this).css('color', '#000000');
+ }
+
+ var offHoverAction2 = function(){
+   $(this).css('color', '#FFFFFF');
+ }
+
+//$(".hero-content h3").hover(onHoverAction2, offHoverAction2);
