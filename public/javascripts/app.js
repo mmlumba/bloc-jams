@@ -98,10 +98,11 @@ require('./collection');
 
 ;require.register("scripts/collection", function(exports, require, module) {
 var updateCollectionView = function() {
+   var randomAlbum = Math.floor(Math.random() * 76) + 25;
    var $collection = $(".collection-container .row");
    $collection.empty();
 
-   for (var i = 0; i < 33; i++) {
+   for (var i = 0; i < randomAlbum; i++) {
      var $newThumbnail = buildAlbumThumbnail();
      $collection.append($newThumbnail);
    }
@@ -118,6 +119,8 @@ var buildAlbumThumbnail = function() {
      + '      <a href="/album.html"> Artist name </a>'
      + '      <br/>'
      + '      X songs'
+     + '      <br/>'
+     + '      X:XX Total Length'
      + '      <br/>'
      + '    </p>'
      + '  </div>'
