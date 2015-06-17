@@ -170,6 +170,22 @@ if (document.URL.match(/\/album.html/)) {
   // Wait until the HTML is fully processed.
   $(document).ready(function() {
     changeAlbumView(albumPicasso);
+    var clicked = false;
+    console.log("nothing here!");
+    /*changeAlbumView(albumPicasso);
+    $('img').click(function(){
+      changeAlbumView(albumMarconi);
+    })*/
+    $('img').bind("click", function(){
+      if (clicked){
+        clicked = false;
+        return changeAlbumView(albumPicasso);
+        console.log("Picasso's album");
+      }
+      clicked = true;
+      return changeAlbumView(albumMarconi);
+      console.log("Marconi's album");
+    });
   });
 }
 
