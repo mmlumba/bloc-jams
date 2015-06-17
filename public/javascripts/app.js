@@ -243,8 +243,17 @@ if (document.URL.match(/\/collection.html/)) {
 ;require.register("scripts/landing", function(exports, require, module) {
 $(document).ready(function() {
   $('.hero-content h3').click(function(){
+    var clicked = false;
     var subText = $(this).text();
      $(this).text(subText + "!");
+     $(this).bind("click", function(){ //changes color but doesn't switch back to white...
+       if (clicked){
+         //clicked = false;
+         return $(this).css('color', '#FFFFFF');
+       }
+       clicked = true;
+       return $(this).css('color', '#000000');
+     });
   });
 
  var onHoverAction = function(event) {
