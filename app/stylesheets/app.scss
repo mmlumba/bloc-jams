@@ -2,7 +2,7 @@
     height: 100%;
   }
 
-  body {
+  body { //element
     font-family: 'Open Sans';
     color: #FFFFFF;
     min-height: 100%;
@@ -10,10 +10,12 @@
     background: radial-gradient(#2b1339, #380c77);
     margin: 0;
     background-attachment: fixed;
+    padding-bottom: 150px;
   }
 
-  body.landing {
+  body.landing { //class
     background: #5B5579;
+    padding-bottom: 0;
   }
 
   .hero-content {
@@ -172,3 +174,165 @@
 .collection-album-container .collection-overlay-button .fa-play {
   padding-left: 5px;
 }
+
+.player-bar {
+   position: fixed; //keeps container stuck to the bottom of the page
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 150px;
+   background: rgba(255, 255, 255, 0.3);
+   z-index: 100; //the higher the z-index the more the element is up in front of the rest of the elements
+ }
+
+
+ .player-bar a, .player-bar a:hover {
+   color: white;
+   cursor: pointer;
+   text-decoration: none;
+ }
+
+
+ .player-bar .container {
+   display: table; //element behaves like a table
+   padding: 0;
+   min-height: 100%;
+ }
+
+ .player-bar-control-group {
+   display: table-cell; //element behaves like table cell
+   vertical-align: middle;
+ }
+
+ .player-bar .left-controls {
+   width: 25%;
+   text-align: left;
+ }
+
+ .player-bar .right-controls {
+   width: 25%;
+   text-align: right;
+ }
+
+ .player-bar .play-controls a {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+
+  .player-bar .play-controls .previous {
+    margin-right: 65px;
+  }
+
+  .player-bar .play-controls .play-pause {
+    margin-right: 60px;
+    font-size: 30px
+  }
+
+  .player-bar .currently-playing {
+    width: 50%;
+    text-align: center;
+    position: relative;
+  }
+
+  .player-bar .currently-playing .song-name,
+  .player-bar .currently-playing .artist-name
+  {
+    text-align: center;
+    font-size: 12px;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    font-weight: 300;
+  }
+
+  .player-bar .currently-playing .song-name {
+    top: 20px;
+  }
+
+  .player-bar .currently-playing .artist-name {
+    bottom: 20px;
+  }
+
+  .seek-control {
+    position: relative;
+  }
+
+  .seek-control .current-time {
+    position: absolute;
+    top: 10px;
+  }
+
+  .seek-control .total-time {
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
+
+  .seek-bar {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .seek-bar .fill {
+    background: white;
+    width: 36%;
+    height: 5px;
+    border-radius: 2px;
+  }
+
+  .seek-bar .thumb {
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background: white;
+    left: 36%;
+    margin-left: -5px;
+    top: 50%;
+    margin-top: -5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 100ms ease-in-out; //transitions an element between two states
+  }
+
+  .seek-bar:hover .thumb {
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+  }
+
+  .player-bar .queue-toggle {
+    display: inline-block;
+    margin-left: 75px;
+  }
+
+  .player-bar .queue-toggle i {
+    font-size: 20px;
+  }
+
+  .player-bar .volume {
+    display: inline-block;
+  }
+
+  .player-bar .volume i {
+    width: 40px;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .player-bar .volume .seek-bar {
+    display: inline-block;
+    width: 100px;
+    vertical-align: middle;
+  }
+
+  .fa.fa-backward, .fa.fa-play, .fa.fa-forward{ //commas used to apply styles to multiple classes
+    transition: all 0.2s ease-in-out;
+  }
+
+  .fa.fa-backward:hover, .fa.fa-play:hover, .fa.fa-forward:hover{
+    opacity: 0.4;
+  }
