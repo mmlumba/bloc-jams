@@ -2,30 +2,24 @@
   margin-top: 55px;
   margin-bottom: 40px;
 }
-/*@mixin album-heads($line-height, $font-size, $font-weight){
+@mixin album-heads($line-height, $font-size, $font-weight){
   line-height: $line-height;
   font-size: $font-size;
   font-weight: $font-weight;
-}*/
+}
 // This styles the right side of our Album Header
 .album-header-information {
   // Pushes the album information down and makes sure there's sufficient space at the bottom of the page
   margin-top: 45px;
   margin-bottom: 20px;
-  h3, h4, h5 {
-    line-height: 150%;
-  }
   h3 {
-    font-size: 48px;
-    font-weight: 300;
+    @include album-heads(150%, 48px, 300)
   }
   h4 {
-    font-size: 24px;
-    font-weight: 700;
+    @include album-heads(150%, 24px, 700)
   }
   h5 {
-    font-size: 16px;
-    font-weight: 500;
+    @include album-heads(150%, 16px, 700)
   }
 }
 /*
