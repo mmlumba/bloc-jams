@@ -120,6 +120,45 @@ var changeAlbumView = function(album) {
 
 };
 
+var updateSeekPercentage = function($seekBar, event) {
+  var barWidth = $seekBar.width();
+  var offsetX = event.pageX - $seekBar.offset().left; // get mouse x offset here
+
+  var offsetXPercent = (offsetX  / barWidth) * 100; //percentage of bar's total width
+  offsetXPercent = Math.max(0, offsetXPercent); //return the largest of zero or more numbers https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+  offsetXPercent = Math.min(100, offsetXPercent); //returns the smallest of zero or more numbers https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min
+
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+}
+
+var setupSeekBars = function() {
+
+   $seekBars = $('.player-bar .seek-bar');
+   $seekBars.click(function(event) {
+     updateSeekPercentage($(this), event);
+   });
+
+   $seekBars.find('.thumb').mousedown(function(event){
+    var $seekBar = $(this).parent();
+
+    $seekBar.addClass('no-animate');
+
+    $(document).bind('mousemove.thumb', function(event){
+      updateSeekPercentage($seekBar, event);
+    });
+
+    //cleanup
+    $(document).bind('mouseup.thumb', function(){
+      $seekBar.removeClass('no-animate');
+      $(document).unbind('mousemove.thumb');
+      $(document).unbind('mouseup.thumb');
+    });
+
+  });
+ };
+
 var albumPicasso = {
    name: 'The Colors',
    artist: 'Pablo Picasso',
@@ -213,13 +252,9 @@ if (document.URL.match(/\/album.html/)) {
   // Wait until the HTML is fully processed.
   $(document).ready(function() {
     changeAlbumView(albumPicasso);
-    var clicked = false;
-    console.log("nothing here!");
-    /*changeAlbumView(albumPicasso);
-    $('img').click(function(){
-      changeAlbumView(albumMarconi);
-    })*/
-    $('img').bind("click", function(){
+    setupSeekBars();
+    //var clicked = false;
+    /*$('img').bind("click", function(){
       if (clicked){
         clicked = false;
         return changeAlbumView(albumPicasso);
@@ -228,7 +263,7 @@ if (document.URL.match(/\/album.html/)) {
       clicked = true;
       return changeAlbumView(albumMarconi);
       console.log("Marconi's album");
-    });
+    });*/
   });
 }
 
@@ -236,8 +271,8 @@ if (document.URL.match(/\/album.html/)) {
 
 ;require.register("scripts/app", function(exports, require, module) {
 require("./landing");
-require('./collection');
-require('./album');
+require("./collection");
+require("./album");
 
 });
 
