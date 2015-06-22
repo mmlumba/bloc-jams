@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="BlocJams">
   <head>
     <title>Bloc Jams</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.1/build/cssreset/cssreset-min.css">
@@ -8,12 +8,13 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/javascripts/vendor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
     <script src="/javascripts/app.js"></script>
     <script>
       require('scripts/app');
     </script>
   </head>
-  <body class="landing">
+  <body ng-controller='Landing.controller' class='landing'>
      <nav class="player-header-nav navbar">
        <div class="container">
          <div class='navbar-header'> <!-- Nav Bar -->
@@ -25,8 +26,8 @@
      </nav>
     <div class="hero-content"><!--Hero Content-->
       <div class="container">
-        <h1>Bloc Jams</h1>
-        <h3>Turn the music up!</h3>
+        <h1 ng-click="siteHeadClicked(albumURLs)">{{siteHead}}</h1>
+        <h3 ng-click="subTextClicked()">{{subText}}</h3>
       </div>
     </div>
     <div class="selling-points container"><!--Selling Points-->
@@ -45,5 +46,12 @@
       </div><!--end point-->
       </div>
     </div>
+    <div class="landing-album-list container">
+       <div class="row">
+         <div class="col-md-4" ng-repeat="albumURL in albumURLs">
+           <img ng-src="{{albumURL}}">
+         </div>
+       </div>
+     </div>
   </body>
 </html>
