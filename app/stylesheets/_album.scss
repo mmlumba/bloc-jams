@@ -49,6 +49,11 @@
 .table.album-song-listing {
   // Override the font for the entire table.
   font-weight: 300;
+  tr {
+    &.odd {
+      background-color: #7D498C;
+    }
+  }
   td {
     padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, .4);

@@ -82,6 +82,8 @@
 */
 .table.album-song-listing {
   font-weight: 300; }
+  .table.album-song-listing tr.odd {
+    background-color: #7d498c; }
   .table.album-song-listing td {
     padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.4); }
