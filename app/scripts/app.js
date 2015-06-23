@@ -27,24 +27,40 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
 
   $stateProvider.state('landing', {
     url: '/',
-    controller: 'Landing.controller',
-    templateUrl: '/templates/landing.html'
-  });
-  $stateProvider.state('songs',{
-    url:'/song',
-    controller: 'Landing.controller',
-    templateUrl: '/templates/songs.html'
+    views: {
+      '': {
+        controller: 'Landing.controller',
+        templateUrl: '/templates/landing.html'
+      },
+      'playerBar@landing': {
+        templateUrl: '/templates/player_bar.html'
+      }
+    }
   });
   $stateProvider.state('collection', {
     url: '/collection',
-    controller: 'Collection.controller',
-    templateUrl: '/templates/collection.html'
+    views: {
+      '': {
+        controller: 'Collection.controller',
+        templateUrl: '/templates/collection.html'
+      },
+      'playerBar@collection': {
+        templateUrl: '/templates/player_bar.html'
+      }
+    }
   });
   $stateProvider.state('album', {
-     url: '/album',
-     templateUrl: '/templates/album.html',
-     controller: 'Album.controller'
-   });
+    url: '/album',
+    views: {
+      '': {
+        controller: 'Album.controller',
+        templateUrl: '/templates/album.html'
+      },
+      'playerBar@album': {
+        templateUrl: '/templates/player_bar.html'
+      }
+    }
+  });
 }]);
 
 blocJams.controller('Landing.controller', ['$scope', function($scope) {

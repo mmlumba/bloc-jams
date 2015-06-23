@@ -1,4 +1,4 @@
-<div class="collection-container container">
+<div class="collection-container container" ui-view="view1">
   <div class="row"> <!-- Album Header -->
     <div ng-repeat="album in albums" class="collection-album-container col-md-2">
       <div ng-mouseenter="showOverlay = true" ng-mouseleave="showOverlay = false" class="collection-album-image-container">
@@ -27,5 +27,5 @@
       </div>
     </div>
   </div>
-  <ng-include src="'/templates/player_bar.html'"></ng-include>
 </div>
+<div ui-view="playerBar"></div>
