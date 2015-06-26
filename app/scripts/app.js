@@ -63,7 +63,7 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
   });
 }]);
 
-blocJams.controller('Landing.controller', ['$scope', function($scope) {
+blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($scope, ConsoleLogger) {
   $scope.subText = "Turn the music up!"; //$scope connects the code in our controller and the HTML view
 
   $scope.subTextClicked = function() {
@@ -89,18 +89,28 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
       return o;
     };
 
+    $scope.ConsoleLogger = ConsoleLogger;
+    $scope.log = function(){
+      ConsoleLogger.log();
+    }
+
  }]);
 
- blocJams.controller('Collection.controller', ['$scope', function($scope) {
+ blocJams.controller('Collection.controller', ['$scope', 'ConsoleLogger', function($scope, ConsoleLogger) {
    $scope.albums = [];
    $scope.showOverlay = false;
 
    for (var i = 0; i < 33; i++) {
      $scope.albums.push(angular.copy(albumPicasso));
    }
+
+   $scope.ConsoleLogger = ConsoleLogger;
+   $scope.log = function(){
+     ConsoleLogger.log();
+   }
  }]);
 
- blocJams.controller('Album.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+ blocJams.controller('Album.controller', ['$scope', 'SongPlayer', 'ConsoleLogger', function($scope, SongPlayer, ConsoleLogger) {
    $scope.album = angular.copy(albumPicasso);
 
    var hoveredSong = null;
@@ -132,6 +142,11 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
       SongPlayer.pause();
     };
 
+    $scope.ConsoleLogger = ConsoleLogger;
+    $scope.log = function(){
+      ConsoleLogger.log();
+    }
+
  }]);
 
  blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
@@ -139,8 +154,9 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
 }]);
 
  blocJams.service('SongPlayer', function() {
-   var trackIndex = function(album, song) {
-     return album.songs.indexOf(song);
+   var trackIndex = function(album, song) { //calculate the trackIndex of a song within a current album
+     return album.songs.indexOf(song); //receives album and song, then uses JS indexOf function to determine song's location in an album
+     //album.songs is from line 14; its a "songs" array with name and time info of each song
    };
 
    return {
@@ -155,18 +171,19 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
        this.playing = false;
      },
      next: function() {
-       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
+       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong); //instantiation of trackIndex function
        currentTrackIndex++;
-       if (currentTrackIndex >= this.currentAlbum.songs.length) {
-         currentTrackIndex = 0;
+       if (currentTrackIndex >= this.currentAlbum.songs.length) { //if the song is the last song...
+         currentTrackIndex = 0; //restart the album with the song at index 0
        }
+
        this.currentSong = this.currentAlbum.songs[currentTrackIndex];
      },
      previous: function() {
        var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
        currentTrackIndex--;
-       if (currentTrackIndex < 0) {
-         currentTrackIndex = this.currentAlbum.songs.length - 1;
+       if (currentTrackIndex < 0) { //if the song is the first song..
+         currentTrackIndex = this.currentAlbum.songs.length - 1;  //restart the album with the song at index
        }
 
        this.currentSong = this.currentAlbum.songs[currentTrackIndex];
@@ -175,5 +192,14 @@ blocJams.controller('Landing.controller', ['$scope', function($scope) {
        this.currentAlbum = album;
        this.currentSong = song;
      }
-   };
+   }; //end of return
+ }); //end of service
+
+ blocJams.service('ConsoleLogger', function(){
+   return {
+     //myMessage: null;
+     log: function(){
+       console.log(this.myMessage);
+     }
+   }
  });

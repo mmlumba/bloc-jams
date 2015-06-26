@@ -18,9 +18,12 @@ font-family: 'Open Sans';
 color: white;
 min-height: 100%;
 @include bg(#2b1339, #380c77);
-//background: -webkit-radial-gradient(  #2b1339, #380c77);
-//background: radial-gradient(   #2b1339, #380c77);
 padding-bottom: 150px;
+  div {
+    input {
+      color: #000000;
+    }
+  }
 }
 
 body.landing {

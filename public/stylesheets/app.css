@@ -447,6 +447,8 @@ body {
   background: -webkit-radial-gradient(#2b1339, #380c77);
   background: radial-gradient(#2b1339, #380c77);
   padding-bottom: 150px; }
+  body div input {
+    color: black; }
 
 body.landing {
   background: #5b5579;
