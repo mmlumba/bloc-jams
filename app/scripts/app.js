@@ -174,7 +174,7 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
        var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong); //instantiation of trackIndex function
        currentTrackIndex++;
        if (currentTrackIndex >= this.currentAlbum.songs.length) { //if the song is the last song...
-         currentTrackIndex = 0; //restart the album with the song at index 0
+         currentTrackIndex = this.currentAlbum.songs.length - 1;  //end the next function at song with index length-1
        }
 
        this.currentSong = this.currentAlbum.songs[currentTrackIndex];
@@ -183,7 +183,7 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
        var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
        currentTrackIndex--;
        if (currentTrackIndex < 0) { //if the song is the first song..
-         currentTrackIndex = this.currentAlbum.songs.length - 1;  //restart the album with the song at index
+         currentTrackIndex = 0;  //end the previous function at song with index 0
        }
 
        this.currentSong = this.currentAlbum.songs[currentTrackIndex];
