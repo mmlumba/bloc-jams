@@ -68,6 +68,20 @@ blocJams.directive('slider', function(){
   };
 });
 
+blocJams.directive('click-me', function(){
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/templates/directives/clickMe.html',
+    link: function(scope, element, attributes){
+      $('click-me').click(function(){
+          alert("Work hard play hard");
+        }
+      );
+    }
+  }
+});
+
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
