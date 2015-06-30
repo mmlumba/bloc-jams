@@ -340,20 +340,6 @@ blocJams.directive('slider', function(){
   };
 });
 
-blocJams.directive('click-me', function(){
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: '/templates/directives/clickMe.html',
-    link: function(scope, element, attributes){
-      $('click-me').click(function(){
-          alert("Work hard play hard");
-        }
-      );
-    }
-  }
-});
-
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
 
@@ -552,6 +538,55 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
      //myMessage: null;
      log: function(){
        console.log(this.myMessage);
+     }
+   }
+ });
+
+ blocJams.directive('clickMe', function(){
+   return {
+     restrict: 'E',
+     replace: false,
+     templateUrl: '/templates/directives/clickMe.html',
+     link: function(scope, element, attributes){
+       $(element).click(function(){
+           alert("Work hard play hard");
+         }
+       );
+     }
+   }
+ });
+
+ blocJams.directive('countHoverTime', function(){
+   return {
+     restrict: 'A',
+     link: function(scope, element, attributes){
+       var counter = 0;
+       var timeout = null;
+
+
+       $(element).mouseenter(function(){
+         console.log('enter');
+         timeout = setTimeout(function() {
+           counter++;
+         }, 1000);
+       });
+
+       $(element).mouseleave(function() {
+         clearTimeout(timeout);
+         console.log(counter);
+         counter = 0;
+       });
+     }
+   }
+ });
+
+ blocJams.directive('classify', function(){
+   return {
+     restrict: 'EAC',
+     link: function(scope, element, attributes){
+       var text = $(element).text();
+       $(element).addClass(text);
+       //$(element).text('');
      }
    }
  });
