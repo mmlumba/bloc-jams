@@ -242,6 +242,8 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
  blocJams.controller('Album.controller', ['$scope', 'SongPlayer', 'ConsoleLogger', function($scope, SongPlayer, ConsoleLogger) {
    $scope.album = angular.copy(albumPicasso);
 
+   SongPlayer.setSong($scope.album, $scope.album.songs[0]);
+
    var hoveredSong = null;
 
    $scope.onHoverSong = function(song) {
@@ -264,7 +266,7 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
 
    $scope.playSong = function(song) {
      SongPlayer.setSong($scope.album, song);
-     SongPlayer.play();
+     //SongPlayer.play();
     };
 
     $scope.pauseSong = function(song) {
@@ -275,7 +277,6 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
     $scope.log = function(){
       ConsoleLogger.log();
     }
-
  }]);
 
  blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
@@ -287,6 +288,16 @@ blocJams.controller('Landing.controller', ['$scope', 'ConsoleLogger', function($
        'fa-volume-down': SongPlayer.volume <= 70 && SongPlayer.volume > 0,
        'fa-volume-up': SongPlayer.volume > 70
      }
+   }
+
+   $scope.setNextSong = function(){
+     SongPlayer.next();
+     SongPlayer.play();
+   }
+
+   $scope.setPreviousSong = function(){
+     SongPlayer.previous();
+     SongPlayer.play();
    }
 
   SongPlayer.onTimeUpdate(function(event, time){
@@ -312,7 +323,14 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
 
      play: function() {
        this.playing = true;
-       currentSoundFile.play();
+       //currentSoundFile.play();
+       if (!currentSoundFile){
+         var song = this.currentAlbum.songs[0];
+         song.play();
+       }
+       else {
+         currentSoundFile.play();
+       }
      },
      pause: function() {
        this.playing = false;
@@ -357,23 +375,20 @@ blocJams.service('SongPlayer', ['$rootScope', function($rootScope) {
       if(currentSoundFile){
         currentSoundFile.setVolume(volume);
       }
-      console.log(currentSoundFile.getVolume());
-      /*
-      elseif(currentSoundFile.)
-      */
       this.volume = volume;
     },
 
-    /*mute: function(volume){
-      var currentVolume = currentSoundFile.getVolume();
+    mute: function(){
+      var currentVolume = this.volume;
       if (currentVolume > 0){
         currentSoundFile.mute();
+        this.volume = 0;
       }
       else {
-        currentSoundFile.setVolume(currentVolume);
+        currentSoundFile.unmute();
+        this.volume = currentSoundFile.getVolume();
       }
-      //this.volume = volume;
-    }*/
+    },
 
      setSong: function(album, song) {
        if (currentSoundFile) {
