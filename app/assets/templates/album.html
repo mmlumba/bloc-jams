@@ -32,10 +32,10 @@
             </span>
           </td>
         <td class="col-md-9"> {{ song.name }} </td>
-        <td class="col-md-2"> {{ song.length }} </td>
+        <td class="col-md-2"> {{ song.length | timecode }} </td>
       </tr>
      </table>
    </div>
-   <input type="text" ng-model="ConsoleLogger.myMessage" ng-change="log()" name="something"/>
+   <!--<input type="text" ng-model="ConsoleLogger.myMessage" ng-change="log()" name="something"/>-->
  </div>
  <div ui-view="playerBar"></div>
